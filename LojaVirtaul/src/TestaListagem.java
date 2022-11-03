@@ -1,8 +1,9 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 public class TestaListagem {
 
@@ -11,8 +12,8 @@ public class TestaListagem {
 		 ConnectionFactory connectionFactory = new ConnectionFactory();
 		 Connection connection = connectionFactory.recuperarConexao();
 		 
-		 Statement stm = (Statement) connection.createStatement();
-		 stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+		 PreparedStatement stm =  connection.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+		 stm.execute();
 		 ResultSet rst = stm.getResultSet();
 		 while(rst.next()) {
 			 Integer id = rst.getInt("ID"); 
